@@ -119,7 +119,7 @@ $routes->group('TrJabatan', static function ($routes) {
 
 $routes->get('/json', 'Home::json');
 
+$routes->post('auth', 'AuthController::login');
 $routes->group('Api', static function ($routes) {
-    $routes->post('auth', 'AuthController::login');
-    $routes->get('tes', 'AuthController::tes');
+    $routes->post('detailpegawai', 'Api\UserController::getDetail');
 });

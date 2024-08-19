@@ -80,7 +80,7 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
-            'cekLogin' => ['except' => ['aksespintu', 'ceklogin', 'Api/*']],
+            'cekLogin' => ['except' => ['aksespintu', 'ceklogin', 'auth', 'Api/*']],
 
             // 'honeypot',
             // 'csrf',
@@ -109,13 +109,13 @@ class Filters extends BaseFilters
 
     public array $filters = [
         'cekSuperAdmin' => [
-            'before' => ['agama/', 'goldarah', 'TingkatDidik', 'StatusKeluarga', 'StatusPegawai', 'Aktif', 'pegawai'],
+            'before' => ['agama/', 'goldarah', 'TingkatDidik', 'StatusKeluarga', 'StatusPegawai', 'Aktif'],
         ],
         'cekUser' => [
             'before' => ['pegawai/detail'],
         ],
         'auth' => [
-            'before' => ['Api/tes'],
+            'before' => ['Api/*'],
         ],
     ];
 }

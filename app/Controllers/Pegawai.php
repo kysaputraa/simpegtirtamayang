@@ -211,9 +211,11 @@ class Pegawai extends BaseController
 
     public function detail($nik)
     {
-        if (session()->get('level') == 3 and session()->get('username') != $nik)
+        if (session()->get('level') == 3 and session()->get('username') != $nik) {
             $this->session->setFlashdata('gagal', 'You Are UnAuthorized to look this page !');
-        return redirect()->to('/');
+            return redirect()->to('/');
+        }
+
         $agama = $this->GlobalModel->getAgama()->getResult();
         $pegawai = $this->PegawaiModel->getPegawaiDetail($nik)->getRow();
         $pasangan = $this->KeluargaModel->getPasagan($nik)->getResult();

@@ -62,7 +62,7 @@
         <!-- end #sidebar -->
 
         <!-- begin #content -->
-        <div id="content" class="content" style="background-color: #cccccc; font-weight: bold;">
+        <div id="content" class="content">
             <?= $this->renderSection('content') ?>
         </div>
         <!-- end #content -->
