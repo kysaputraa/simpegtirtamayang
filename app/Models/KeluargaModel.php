@@ -34,6 +34,16 @@ class KeluargaModel extends Model
     // protected $updatedField  = 'updated_at';
     // protected $deletedField  = 'deleted_at';
 
+    public function getKeluarga($NIK)
+    {
+        $builder = $this->db->table('tkeluarga a');
+        return $builder->select('a.*')
+            ->where('NIK', $NIK)
+            ->where('status', 'aktif')
+            ->orderBy('Nama', 'asc')
+            ->get();
+    }
+
     public function getPasagan($NIK)
     {
         $builder = $this->db->table('tkeluarga a');

@@ -122,4 +122,8 @@ $routes->get('/json', 'Home::json');
 $routes->post('auth', 'AuthController::login');
 $routes->group('Api', static function ($routes) {
     $routes->post('detailpegawai', 'Api\UserController::getDetail');
+    $routes->post('getKeluarga', 'Api\UserController::getKeluarga');
+    $routes->post('getPendidikan', 'Api\UserController::getPendidikan');
+    $routes->post('getTrJabatan', 'Api\UserController::getTrJabatan');
+    $routes->post('getBerkala', 'Api\UserController::getBerkala');
 });
