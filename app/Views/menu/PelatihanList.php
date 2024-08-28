@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">DATA Transaksi Jabatan Pegawai<small class="text-capitalize"> Master Transaksi Jabatan</small></h1>
+<h1 class="page-header">DATA Pelatihan Pegawai<small class="text-capitalize"> Master Pelatihan</small></h1>
 <!-- end page-header -->
 
 <!-- begin row -->
@@ -27,7 +27,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Data Transaksi Jabatan - Perumdam Tirta Mayang Kota Jambi</h4>
+                <h4 class="panel-title">Data Pelatihan - Perumdam Tirta Mayang Kota Jambi</h4>
                 <a href="#" data-target='#modaltambah' data-toggle="modal"><span class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah</span></a>
             </div>
             <div class="panel-body">
@@ -35,33 +35,35 @@
                     <table id="data-table" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th width='50'>NO</th>
-                                <th>No Jabatan</th>
-                                <th>NIK</th>
-                                <th>Jabatan Baru</th>
-                                <th>TMT</th>
-                                <th>No SK / File</th>
-                                <th>Tanggal SK</th>
-                                <th>Keterangan</th>
+                                <th width='25px'>NO</th>
+                                <th>Pegawai</th>
+                                <th>Nama</th>
+                                <th>Jenis</th>
+                                <th>Tempat</th>
+                                <th>Tgl Lama</th>
+                                <th>Tgl Mulai - Akhir</th>
+                                <th>Penyelenggara</th>
+                                <th>File</th>
                                 <th width='70px'>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            foreach ($TrJabatan as $row) {
+                            foreach ($Pelatihan as $row) {
                                 echo "<tr>";
                                 echo "<td class='text-center'>" . $no . "</td>";
-                                echo "<td>" . $row->NoJabatan . "</td>";
-                                echo "<td>" . $row->NIK . "</td>";
-                                echo "<td>" . $row->NamaJabatan2 . "</td>";
-                                echo "<td>" . $row->TMT . "</td>";
-                                echo "<td>" . $row->NoSK . " <a href='uploads/" . $row->NIK . "/jabatan/" . $row->file . "' target='_blank' title='view'><i class='fa fa-file fa-lg'></i></a></td>";
-                                echo "<td>" . $row->TglSK . "</td>";
-                                echo "<td>" . $row->Keterangan . "</td>";
+                                echo "<td>" . $row->Nama . "</td>";
+                                echo "<td>" . $row->NamaPelatihan . "</td>";
+                                echo "<td>" . $row->NamaPelatihan . "</td>";
+                                echo "<td>" . $row->TempatPelatihan . "</td>";
+                                echo "<td>" . $row->TglPelatihan . "</td>";
+                                echo "<td>" . $row->TglMulai . " s/d " . $row->TglSelesai . "</td>";
+                                echo "<td>" . $row->Penyelenggara . "</td>";
+                                echo "<td> <a href='uploads/" . $row->NIK . "/pelatihan/" . $row->file . "' target='_blank' title='view'><i class='fa fa-file fa-lg'></i></a></td>";
                                 echo "<td>";
                                 echo "<span><a data-id='" . $row->id . "' data-toggle='modal' data-target='#modaledit' class='btn btn-info btn-icon btn-sm' ><i class='fa fa-pencil fa-lg'></i></a></span> ";
-                                echo "<span><a onClick='return confirm(`Apakah anda yakin ingin menghapus data ini ?`)' href='TrJabatan/delete/" . $row->id . "' type='button' class='btn btn-danger btn-icon btn-sm' title='delete'><i class='fa fa-trash-o fa-lg'></i></a></span> ";
+                                echo "<span><a onClick='return confirm(`Apakah anda yakin ingin menghapus data ini ?`)' href='Pelatihan/delete/" . $row->id . "' type='button' class='btn btn-danger btn-icon btn-sm' title='delete'><i class='fa fa-trash-o fa-lg'></i></a></span> ";
                                 echo "</tr>";
                                 $no++;
                             }
@@ -82,7 +84,7 @@
             <div class="modal-header">
                 <h5 class="modal-title"><span class="label label-inverse"> # Tambah</span> Silahkan isi data di bawah untuk menambah data .</h5>
             </div>
-            <form role="form" action="TrJabatan/add" method="post" enctype="multipart/form-data">
+            <form role="form" action="Pelatihan/add" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label">Pegawai</label>
@@ -93,38 +95,44 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Nomor Jabatan</label>
-                        <input type="text" class="form-control" name="NoJabatan" value="" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Nomor SK</label>
-                        <input type="text" class="form-control" name="NoSK" value="" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Tanggal SK</label>
-                        <input type="date" class="form-control" name="TglSK" value="" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">TMT</label>
-                        <input type="date" class="form-control" name="TMT" value="" required />
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Jabatan Baru</label>
-                        <select class="form-control" name="KdJabatanBaru" id="">
-                            <?php
-                            foreach ($jabatan as $row) {
-                                echo "<option value='" . $row->id . "'>" . $row->NamaJabatan2 . "</option>";
-                            }
-                            ?>
+                        <label class="control-label">Tingkat Pelatihan</label>
+                        <select name="KdJenisPelatihan" id="" class="form-control">
+                            <?php foreach ($jenispelatihan as $row) {
+                                echo "<option value='" . $row->KdJenisPelatihan . "'>" . $row->JenisPelatihan . "</option>";
+                            } ?>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label">File</label>
-                        <input accept=".pdf" id="file-input" type="file" class="form-control" name="file" value="" required />
+                        <label class="control-label">Nomor Pelatihan</label>
+                        <input type="text" class="form-control" name="NoPelatihan" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nama Pelatihan</label>
+                        <input type="text" class="form-control" name="NamaPelatihan" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Tempat Pelatihan</label>
+                        <input type="text" class="form-control" name="TempatPelatihan" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Tgl Mulai</label>
+                        <input type="date" class="form-control" name="TglMulai" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Tgl Selesai</label>
+                        <input type="date" class="form-control" name="TglSelesai" value="" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Penyelenggara</label>
+                        <input type="text" class="form-control" name="Penyelenggara" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Keterangan</label>
                         <input type="text" class="form-control" name="Keterangan" value="" required />
+                    </div>
+                    <div>
+                        <label class="control-label">File</label>
+                        <input accept="application/pdf" type="file" class="form-control" name="file" value="" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -142,7 +150,7 @@
             <div class="modal-header">
                 <h5 class="modal-title"><span class="label label-inverse"> # Edit</span> Silahkan isi data di bawah untuk update data .</h5>
             </div>
-            <form role="form" action="TrJabatan/edit" method="post" enctype="multipart/form-data">
+            <form role="form" action="Pelatihan/edit" method="post" enctype="multipart/form-data">
                 <div class="modal-body hasiledit">
 
                 </div>
@@ -221,7 +229,7 @@
     $('#modaledit').on('show.bs.modal', function(e) {
         var id = $(e.relatedTarget).data('id');
         $.ajax({
-            url: '<?= base_url('TrJabatan/modaledit') ?>',
+            url: '<?= base_url('Pelatihan/modaledit') ?>',
             method: 'POST',
             data: {
                 'id': id

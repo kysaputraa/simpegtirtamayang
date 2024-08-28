@@ -27,6 +27,18 @@ class GlobalModel extends Model
         return $builder->orderBy('Agama', 'asc')->get();
     }
 
+    public function getPekerjaan()
+    {
+        $builder = $this->db->table('mpekerjaan a');
+        return $builder->orderBy('pekerjaan', 'asc')->get();
+    }
+
+    public function getJenisPelatihan()
+    {
+        $builder = $this->db->table('mpelatihan a');
+        return $builder->orderBy('JenisPelatihan', 'asc')->get();
+    }
+
     public function getStatusKeluarga()
     {
         $builder = $this->db->table('mstatuskeluarga a');

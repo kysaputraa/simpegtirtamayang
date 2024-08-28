@@ -40,7 +40,10 @@ class TrJabatan extends BaseController
     public function modaledit()
     {
         $id = $this->request->getPost('id');
-        $data = ['TrJabatan' => $this->TrJabatanModel->where('id', $id)->first()];
+        $data = [
+            'TrJabatan' => $this->TrJabatanModel->where('id', $id)->first(),
+            'jabatan' => $this->JabatanModel->findAll(),
+        ];
         return view('modal/TrJabatanModalEdit', $data);
     }
 
@@ -61,15 +64,15 @@ class TrJabatan extends BaseController
         ];
 
         $file = $this->request->getFile('file');
-        $filename = $file->getRandomName();
         if ($file->getName() != '') {
+            $filename = $file->getRandomName();
             $data['file'] = $filename;
         }
 
         // print_r($data); die();
         $add = $this->TrJabatanModel->insert($data);
         if ($add) {
-            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penambahan Data Jabatan', 'createdAt' => date('Y-m-d H:i:s')];
+            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penambahan Data transaksi Jabatan', 'createdAt' => date('Y-m-d H:i:s')];
             $this->GlobalModel->insetLog($datalog);
             $this->PegawaiModel->set(['KdJabatan' => $jabatan->KdJabatan, 'KdJabatan2' => $jabatan->KdJabatan2])->where('NIK', $NIK)->update();
             if ($file->getName() != '') {
@@ -85,18 +88,34 @@ class TrJabatan extends BaseController
     public function edit()
     {
         $id = $this->request->getPost('id');
+        $idjabatan = $this->request->getPost('KdJabatanBaru');
+        $jabatan = $this->JabatanModel->where('id', $idjabatan)->first();
         $data = [
-            'NIK' =>  $this->request->getPost('NIK'),
-            'NoIDKepangkatan' =>  $this->request->getPost('NoIDKepangkatan'),
-            'KdKenaikanPangkat' =>  $this->request->getPost('KdKenaikanPangkat'),
-            'KdGolBaru' =>  $this->request->getPost('KdGolBaru'),
-            'NoSKBaru' =>  $this->request->getPost('NoSKBaru'),
-            'TglSKBaru' =>  $this->request->getPost('TglSKBaru'),
-            'TMTBaru' =>  $this->request->getPost('TMTBaru'),
+            'NoJabatan' =>  $this->request->getPost('NoJabatan'),
+            'NoSK' =>  $this->request->getPost('NoSK'),
+            'TglSK' =>  $this->request->getPost('TglSK'),
+            'TMT' =>  $this->request->getPost('TMT'),
             'Keterangan' =>  $this->request->getPost('Keterangan'),
+            'KdJabatanBaru' =>  $jabatan->KdJabatan,
+            'KdJabatanBaru2' =>  $jabatan->KdJabatan2,
         ];
+
+        $file = $this->request->getFile('file');
+        if ($file->getName() != '') {
+            $filename = $file->getRandomName();
+            $data['file'] = $filename;
+        }
+
         $edit = $this->TrJabatanModel->set($data)->where('id', $id)->update();
         if ($edit) {
+            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Edit Data transaksi Jabatan', 'createdAt' => date('Y-m-d H:i:s')];
+            $this->GlobalModel->insetLog($datalog);
+            if ($file->getName() != '') {
+                $file->move(ROOTPATH . 'public/uploads/' . $jabatan->NIK . '/jabatan/', $filename);
+                if (file_exists(ROOTPATH . 'public/uploads/' . $jabatan->NIK . '/jabatan/' . $jabatan->file)) {
+                    unlink(ROOTPATH . 'public/uploads/' . $jabatan->NIK . '/jabatan/' . $jabatan->file);
+                }
+            }
             $this->session->setFlashdata('sukses', 'Berhasil !');
         } else {
             $this->session->setFlashdata('gagal', 'Gagal !');

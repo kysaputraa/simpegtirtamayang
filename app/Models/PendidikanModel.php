@@ -27,11 +27,23 @@ class PendidikanModel extends Model
     // protected $updatedField  = 'updated_at';
     // protected $deletedField  = 'deleted_at';
 
+    public function getPendidikanAll()
+    {
+        $builder = $this->db->table('trpendidikan a');
+        return $builder->select('a.*, b.Nama, c.TingkatPendidikan')
+            ->where('a.status', 'aktif')
+            ->join('tpegawai b', 'b.NIK = a.NIK')
+            ->join('mtingkatdidik c', 'c.KdTingkatDidik = a.KdTingkatDidik')
+            ->orderBy('id', 'desc')
+            ->get();
+    }
+
     public function getPendidikan($nik)
     {
         $builder = $this->db->table('trpendidikan a');
         return $builder->select('a.*')
             ->where('NIK', $nik)
+            ->where('a.status', 'aktif')
             ->get();
     }
 }

@@ -50,6 +50,27 @@ $pegawai = $pegawaiModel->where('NIK', session()->get('username'))->first();
                         <li><a href="Jabatan">Jabatan</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="Keluarga">
+                        <i class="fa fa-users bg-info"></i>
+                        <span>Riwayat Keluarga</span>
+                        <!-- <span class="label label-theme m-l-5">NEW</span> -->
+                    </a>
+                </li>
+                <li>
+                    <a href="Pendidikan">
+                        <i class="fa fa-graduation-cap bg-grey"></i>
+                        <span>Riwayat Pendidikan</span>
+                        <!-- <span class="label label-theme m-l-5">NEW</span> -->
+                    </a>
+                </li>
+                <li>
+                    <a href="Pelatihan">
+                        <i class="fa fa-book bg-warning"></i>
+                        <span>Riwayat Pelatihan/Diklat</span>
+                        <!-- <span class="label label-theme m-l-5">NEW</span> -->
+                    </a>
+                </li>
             <?php } ?>
             <li>
                 <a href="pegawai">

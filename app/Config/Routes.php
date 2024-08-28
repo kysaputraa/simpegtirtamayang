@@ -28,7 +28,6 @@ $routes->group('pegawai', static function ($routes) {
     $routes->post('tambahpendidikan/(:segment)', 'Pegawai::addpendidikan/$1');
     $routes->post('editpendidikan/', 'Pegawai::editpendidikan/');
     $routes->post('proseditpendidikan/', 'Pegawai::proseditpendidikan/');
-    $routes->post('setpendidikanakhir/', 'Pegawai::setpendidikanakhir/');
     $routes->get('hapuspendidikan/(:segment)', 'Pegawai::deletependidikan/$1');
     $routes->get('pencarian/(:segment)', 'Pegawai::search/$1');
     $routes->post('autocomplete', 'Pegawai::pencarian');
@@ -115,6 +114,34 @@ $routes->group('TrJabatan', static function ($routes) {
     $routes->get('delete/(:segment)', 'TrJabatan::delete/$1');
     $routes->post('modaledit', 'TrJabatan::modaledit');
     $routes->post('edit', 'TrJabatan::edit');
+});
+
+$routes->group('Keluarga', static function ($routes) {
+    $routes->get('/', 'Keluarga::index');
+    $routes->post('add', 'Keluarga::add');
+    $routes->post('modal/', 'Keluarga::modal');
+    $routes->get('delete/(:segment)', 'Keluarga::delete/$1');
+    $routes->post('modaledit', 'Keluarga::modaledit');
+    $routes->post('edit', 'Keluarga::edit');
+});
+
+$routes->group('Pendidikan', static function ($routes) {
+    $routes->get('/', 'Pendidikan::index');
+    $routes->post('add', 'Pendidikan::add');
+    $routes->post('modal/', 'Pendidikan::modal');
+    $routes->get('delete/(:segment)', 'Pendidikan::delete/$1');
+    $routes->post('modaledit', 'Pendidikan::modaledit');
+    $routes->post('edit', 'Pendidikan::edit');
+    $routes->post('setpendidikanakhir', 'Pegawai::setpendidikanakhir');
+});
+
+$routes->group('Pelatihan', static function ($routes) {
+    $routes->get('/', 'Pelatihan::index');
+    $routes->post('add', 'Pelatihan::add');
+    $routes->post('modal/', 'Pelatihan::modal');
+    $routes->get('delete/(:segment)', 'Pelatihan::delete/$1');
+    $routes->post('modaledit', 'Pelatihan::modaledit');
+    $routes->post('edit', 'Pelatihan::edit');
 });
 
 $routes->get('/json', 'Home::json');

@@ -239,111 +239,111 @@ class Pegawai extends BaseController
         return view('menu/pegawai_detail', $data);
     }
 
-    public function addPendidikan($NIK)
-    {
-        $data = [
-            'NIK' => $NIK,
-            'NamaSekolah' => $this->request->getPost('NamaSekolah'),
-            'KdTingkatDidik' => $this->request->getPost('KdTingkatDidik'),
-            'TempatLulus' => $this->request->getPost('TempatLulus'),
-            'TahunLulus' => $this->request->getPost('TahunLulus'),
-            'NoIjazah' => $this->request->getPost('NoIjazah'),
-            'Keterangan' => $this->request->getPost('Keterangan'),
-        ];
+    // public function addPendidikan($NIK)
+    // {
+    //     $data = [
+    //         'NIK' => $NIK,
+    //         'NamaSekolah' => $this->request->getPost('NamaSekolah'),
+    //         'KdTingkatDidik' => $this->request->getPost('KdTingkatDidik'),
+    //         'TempatLulus' => $this->request->getPost('TempatLulus'),
+    //         'TahunLulus' => $this->request->getPost('TahunLulus'),
+    //         'NoIjazah' => $this->request->getPost('NoIjazah'),
+    //         'Keterangan' => $this->request->getPost('Keterangan'),
+    //     ];
 
-        $file = $this->request->getFile('file');
-        $filename = $file->getRandomName();
-        if ($file->getName() != '') {
-            $data['file'] = $filename;
-        }
+    //     $file = $this->request->getFile('file');
+    //     $filename = $file->getRandomName();
+    //     if ($file->getName() != '') {
+    //         $data['file'] = $filename;
+    //     }
 
-        $insert = $this->PendidikanModel->insert($data);
-        if ($insert) {
-            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penambahan Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
-            $this->GlobalModel->insetLog($datalog);
-            if ($file->getName() != '') {
-                $file->move(ROOTPATH . 'public/uploads/' . $NIK . '/pendidikan/', $filename);
-            }
-            $this->session->setFlashdata('sukses', 'Berhasil !');
-        } else {
-            $this->session->setFlashdata('gagal', 'Gagal !');
-        }
-        return redirect()->back();
-    }
+    //     $insert = $this->PendidikanModel->insert($data);
+    //     if ($insert) {
+    //         $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penambahan Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
+    //         $this->GlobalModel->insetLog($datalog);
+    //         if ($file->getName() != '') {
+    //             $file->move(ROOTPATH . 'public/uploads/' . $NIK . '/pendidikan/', $filename);
+    //         }
+    //         $this->session->setFlashdata('sukses', 'Berhasil !');
+    //     } else {
+    //         $this->session->setFlashdata('gagal', 'Gagal !');
+    //     }
+    //     return redirect()->back();
+    // }
 
-    public function editpendidikan()
-    {
-        $id = $this->request->getPost('id');
-        $pendidikan = $this->PendidikanModel->where('id', $id)->first();
-        $tingkatdidik = $this->GlobalModel->getTingkatDidik()->getResult();
-        $data = ['pendidikan' => $pendidikan, 'tingkatdidik' => $tingkatdidik];
-        return view('modal/pendidikan_modal_edit', $data);
-    }
+    // public function editpendidikan()
+    // {
+    //     $id = $this->request->getPost('id');
+    //     $pendidikan = $this->PendidikanModel->where('id', $id)->first();
+    //     $tingkatdidik = $this->GlobalModel->getTingkatDidik()->getResult();
+    //     $data = ['pendidikan' => $pendidikan, 'tingkatdidik' => $tingkatdidik];
+    //     return view('modal/pendidikan_modal_edit', $data);
+    // }
 
-    public function proseditpendidikan()
-    {
-        $id = $this->request->getPost('id');
-        $pendidikan = $this->PendidikanModel->where('id', $id)->first();
-        $data = [
-            'NamaSekolah' => $this->request->getPost('NamaSekolah'),
-            'KdTingkatDidik' => $this->request->getPost('KdTingkatDidik'),
-            'TempatLulus' => $this->request->getPost('TempatLulus'),
-            'TahunLulus' => $this->request->getPost('TahunLulus'),
-            'NoIjazah' => $this->request->getPost('NoIjazah'),
-            'Keterangan' => $this->request->getPost('Keterangan'),
-        ];
+    // public function proseditpendidikan()
+    // {
+    //     $id = $this->request->getPost('id');
+    //     $pendidikan = $this->PendidikanModel->where('id', $id)->first();
+    //     $data = [
+    //         'NamaSekolah' => $this->request->getPost('NamaSekolah'),
+    //         'KdTingkatDidik' => $this->request->getPost('KdTingkatDidik'),
+    //         'TempatLulus' => $this->request->getPost('TempatLulus'),
+    //         'TahunLulus' => $this->request->getPost('TahunLulus'),
+    //         'NoIjazah' => $this->request->getPost('NoIjazah'),
+    //         'Keterangan' => $this->request->getPost('Keterangan'),
+    //     ];
 
-        $file = $this->request->getFile('file');
-        $filename = $file->getRandomName();
-        if ($file->getName() != '') {
-            $data['file'] = $filename;
-        }
+    //     $file = $this->request->getFile('file');
+    //     $filename = $file->getRandomName();
+    //     if ($file->getName() != '') {
+    //         $data['file'] = $filename;
+    //     }
 
-        $update = $this->PendidikanModel->set($data)->where('id', $id)->update();
-        if ($update) {
-            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Edit Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
-            $this->GlobalModel->insetLog($datalog);
-            $file->move(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/', $filename);
-            if (file_exists(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file)) {
-                unlink(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file);
-            }
-            $this->session->setFlashdata('sukses', 'Berhasil !');
-        } else {
-            $this->session->setFlashdata('gagal', 'Gagal !');
-        }
-        return redirect()->back();
-    }
+    //     $update = $this->PendidikanModel->set($data)->where('id', $id)->update();
+    //     if ($update) {
+    //         $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Edit Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
+    //         $this->GlobalModel->insetLog($datalog);
+    //         $file->move(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/', $filename);
+    //         if (file_exists(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file)) {
+    //             unlink(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file);
+    //         }
+    //         $this->session->setFlashdata('sukses', 'Berhasil !');
+    //     } else {
+    //         $this->session->setFlashdata('gagal', 'Gagal !');
+    //     }
+    //     return redirect()->back();
+    // }
 
-    public function setpendidikanakhir()
-    {
-        $KdTingkatPendidikan = $this->request->getPost('KdTingkatPendidikan');
-        $NIK = $this->request->getPost('NIK');
-        $update = $this->PegawaiModel->set('KdPendidikan', $KdTingkatPendidikan)->where('NIK', $NIK)->update();
-        if ($update) {
-            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Pergantian data pendidikan terakhir', 'createdAt' => date('Y-m-d H:i:s')];
-            $this->GlobalModel->insetLog($datalog);
-            return "1";
-        } else {
-            return "0";
-        }
-    }
+    // public function setpendidikanakhir()
+    // {
+    //     $KdTingkatPendidikan = $this->request->getPost('KdTingkatPendidikan');
+    //     $NIK = $this->request->getPost('NIK');
+    //     $update = $this->PegawaiModel->set('KdPendidikan', $KdTingkatPendidikan)->where('NIK', $NIK)->update();
+    //     if ($update) {
+    //         $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Pergantian data pendidikan terakhir', 'createdAt' => date('Y-m-d H:i:s')];
+    //         $this->GlobalModel->insetLog($datalog);
+    //         return "1";
+    //     } else {
+    //         return "0";
+    //     }
+    // }
 
-    public function deletependidikan($id)
-    {
-        $pendidikan = $this->PendidikanModel->where('id', $id)->first();
-        $query = $this->PendidikanModel->where('id', $id)->delete();
-        if ($query) {
-            $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penghapusan Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
-            $this->GlobalModel->insetLog($datalog);
-            if (file_exists(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file)) {
-                unlink(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file);
-            }
-            $this->session->setFlashdata('sukses', 'Berhasil !');
-        } else {
-            $this->session->setFlashdata('gagal', 'Gagal !');
-        }
-        return redirect()->back();
-    }
+    // public function deletependidikan($id)
+    // {
+    //     $pendidikan = $this->PendidikanModel->where('id', $id)->first();
+    //     $query = $this->PendidikanModel->where('id', $id)->delete();
+    //     if ($query) {
+    //         $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penghapusan Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
+    //         $this->GlobalModel->insetLog($datalog);
+    //         if (file_exists(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file)) {
+    //             unlink(ROOTPATH . 'public/uploads/' . $pendidikan->NIK . '/pendidikan/' . $pendidikan->file);
+    //         }
+    //         $this->session->setFlashdata('sukses', 'Berhasil !');
+    //     } else {
+    //         $this->session->setFlashdata('gagal', 'Gagal !');
+    //     }
+    //     return redirect()->back();
+    // }
 
     public function pencarian()
     {

@@ -230,4 +230,16 @@
     .object-fit-scale-down {
         object-fit: scale-down;
     }
+
+    .d-flex {
+        display: flex;
+    }
+
+    .align-items-center {
+        align-items: center;
+    }
+
+    .justify-content-center {
+        justify-content: center;
+    }
 </style>

@@ -46,8 +46,8 @@ class Arsip extends BaseController
         ];
 
         $file = $this->request->getFile('file');
-        $filename = $file->getRandomName();
         if ($file->getName() != '') {
+            $filename = $file->getRandomName();
             $data['file'] = $filename;
         }
 
@@ -55,7 +55,9 @@ class Arsip extends BaseController
         if ($insert) {
             $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Penambahan Data Pendidikan', 'createdAt' => date('Y-m-d H:i:s')];
             $this->GlobalModel->insetLog($datalog);
-            $file->move(ROOTPATH . 'public/uploads/' . $NIK . '/arsip/', $filename);
+            if ($file->getName() != '') {
+                $file->move(ROOTPATH . 'public/uploads/' . $NIK . '/arsip/', $filename);
+            }
             $this->session->setFlashdata('sukses', 'Berhasil !');
         } else {
             $this->session->setFlashdata('gagal', 'Gagal !');
@@ -72,8 +74,8 @@ class Arsip extends BaseController
         ];
 
         $file = $this->request->getFile('file');
-        $filename = $file->getRandomName();
         if ($file->getName() != '') {
+            $filename = $file->getRandomName();
             $data['file'] = $filename;
         }
 
@@ -81,9 +83,11 @@ class Arsip extends BaseController
         if ($edit) {
             $datalog = ['NIK' => session()->get('username'), 'transaksi' => 'Edit Data Arsip', 'createdAt' => date('Y-m-d H:i:s')];
             $this->GlobalModel->insetLog($datalog);
-            $file->move(ROOTPATH . 'public/uploads/' . $arsip->NIK . '/arsip/', $filename);
-            if (file_exists(ROOTPATH . 'public/uploads/' . $arsip->NIK . '/arsip/' . $arsip->file)) {
-                unlink(ROOTPATH . 'public/uploads/' . $arsip->NIK . '/arsip/' . $arsip->file);
+            if ($file->getName() != '') {
+                $file->move(ROOTPATH . 'public/uploads/' . $arsip->NIK . '/arsip/', $filename);
+                if (file_exists(ROOTPATH . 'public/uploads/' . $arsip->NIK . '/arsip/' . $arsip->file)) {
+                    unlink(ROOTPATH . 'public/uploads/' . $arsip->NIK . '/arsip/' . $arsip->file);
+                }
             }
             $this->session->setFlashdata('sukses', 'Berhasil !');
         } else {

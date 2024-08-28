@@ -30,7 +30,7 @@ class AuthController extends ResourceController
         }
 
         $issuedAt = time();
-        $expirationTime = $issuedAt + (60 * 60); // 1 hour expiration
+        $expirationTime = $issuedAt + (60 * 60 * 24); // 24 hour expiration
         $jwt = JWT::encode([
             'iss' => 'simpeg tirta mayang',
             'sub' => $cek->username,

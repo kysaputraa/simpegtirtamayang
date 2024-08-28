@@ -64,7 +64,7 @@ class UserController extends ResourceController
 
         $NIK = $this->request->getPost('NIK');
 
-        $keluarga = $this->KeluargaModel->getKeluarga($NIK)->getRow();
+        $keluarga = $this->KeluargaModel->getKeluarga($NIK)->getResult();
 
         return $this->respond([
             'code' => 1,

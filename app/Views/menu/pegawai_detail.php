@@ -273,7 +273,7 @@ $db = \Config\Database::connect(); ?>
                             <th>Nama</th>
                             <th>Tempat Lulus</th>
                             <th>Tahun Lulus</th>
-                            <th>No Ijazah</th>
+                            <th>No Ijazah / File</th>
                             <th width='100px'>Set Akhir</th>
                             <th width='150px'>Aksi</th>
                         </tr>
@@ -297,7 +297,7 @@ $db = \Config\Database::connect(); ?>
                             echo "<td>";
                             echo "<span><a data-id='" . $row->id . "' type='button' href='#' data-toggle='modal' data-target='#modaleditpendidikan' class='btn btn-info btn-icon btn-sm' href='#'><i class='fa fa-pencil fa-lg'></i></a></span> ";
                             if ($row->KdTingkatDidik != $pegawai->KdPendidikan) {
-                                echo "<span><a onClick='return confirm(`Apakah anda yakin ingin menghapus data ini ?`)' href='pegawai/hapuspendidikan/" . $row->id . "' type='button' class='btn btn-danger btn-icon btn-sm' title='delete'><i class='fa fa-trash-o fa-lg'></i></a></span> ";
+                                echo "<span><a onClick='return confirm(`Apakah anda yakin ingin menghapus data ini ?`)' href='Pendidikan/delete/" . $row->id . "' type='button' class='btn btn-danger btn-icon btn-sm' title='delete'><i class='fa fa-trash-o fa-lg'></i></a></span> ";
                             }
                             echo "</td>";
                             echo "</tr>";
@@ -578,35 +578,40 @@ $db = \Config\Database::connect(); ?>
             <div class="modal-header">
                 <h5 class="modal-title"><span class="label label-inverse"> # Tambah</span> Silahkan isi data di bawah untuk menambah data .</h5>
             </div>
-            <form role="form" action="pegawai/tambahpendidikan/<?= $pegawai->NIK ?>" method="post" enctype="multipart/form-data">
+            <form action="Pendidikan/add" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label">Tingkat Pendidikan</label>
-                        <select name="KdTingkatDidik" id="" class="form-control">
+                        <select name="KdTingkatDidik" id="" class="form-control" required>
                             <?php foreach ($tingkatdidik as $row) {
                                 echo "<option value='" . $row->kdtingkatdidik . "'>" . $row->tingkatpendidikan . "</option>";
                             } ?>
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Nomor Pendidikan</label>
+                        <input type="text" class="form-control" name="NoPendidikan" value="" required />
+                        <input type="hidden" class="form-control" name="NIK" value="<?= $pegawai->NIK ?>" required />
+                    </div>
+                    <div class="form-group">
                         <label class="control-label">Nama Sekolah</label>
-                        <input type="text" class="form-control" name="NamaSekolah" value="" />
+                        <input type="text" class="form-control" name="NamaSekolah" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Tempat Lulus</label>
-                        <input type="text" class="form-control" name="TempatLulus" value="" />
+                        <input type="text" class="form-control" name="TempatLulus" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Tahun Lulus</label>
-                        <input type="text" class="form-control" name="TahunLulus" value="" />
+                        <input type="text" class="form-control" name="TahunLulus" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">No Ijazah</label>
-                        <input type="text" class="form-control" name="NoIjazah" value="" />
+                        <input type="text" class="form-control" name="NoIjazah" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Keterangan</label>
-                        <input type="text" class="form-control" name="Keterangan" value="" />
+                        <input type="text" class="form-control" name="Keterangan" value="" required />
                     </div>
                     <div>
                         <label class="control-label">File</label>
@@ -744,7 +749,7 @@ $db = \Config\Database::connect(); ?>
     $('#modaleditpendidikan').on('show.bs.modal', function(e) {
         var id = $(e.relatedTarget).data('id');
         $.ajax({
-            url: '<?= base_url() ?>' + 'pegawai/editpendidikan',
+            url: '<?= base_url() ?>' + 'Pendidikan/modaledit',
             type: 'POST',
             data: {
                 id: id
@@ -798,7 +803,7 @@ $db = \Config\Database::connect(); ?>
     $('.setpendidikanakhir').on('click', function(e) {
         var pendidikan = $(this).data('pendidikan');
         $.ajax({
-            url: '<?= base_url() ?>' + 'pegawai/setpendidikanakhir',
+            url: '<?= base_url() ?>' + 'Pendidikan/setpendidikanakhir',
             type: 'POST',
             data: {
                 NIK: '<?= $pegawai->NIK ?>',
