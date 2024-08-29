@@ -19,13 +19,14 @@ class Home extends BaseController
 
     public function index()
     {
-        $pegawaiByDepartment = $this->PegawaiModel->getPegawaiByDepartment()->getResult();
-        $pegawaiByGol = $this->PegawaiModel->getPegawaiByGol()->getResult();
-        $pegawaiByStatus = $this->PegawaiModel->getPegawaiByStatus()->getResult();
-        $pegawaiByPendidikan = $this->PegawaiModel->getPegawaiByPendidikan()->getResult();
+        $pegawaiByDepartment = $this->PegawaiModel->getDepartmentJumlahPegawai()->getResult();
+        $pegawaiByGol = $this->PegawaiModel->getGolonnganJumlahPegawai()->getResult();
+        $pegawaiByStatus = $this->PegawaiModel->getStatusJumlahPegawai()->getResult();
+        $pegawaiByPendidikan = $this->PegawaiModel->getPendidikanJumlahPegawai()->getResult();
         $BagianAktif = $this->BagianModel->JumlahAktif();
         $pegawai_aktif = $this->PegawaiModel->JumlahAktif();
         $pegawaipensiun = $this->PegawaiModel->getPegawaiPensiun()->getResult();
+        $pegawaiByJK = $this->PegawaiModel->getPegawaiByJK()->getResult();
         $berkala = $this->PegawaiModel->getBekalaMoreThan2()->getResult();
         $data = [
             'pegawai_aktif' => $pegawai_aktif,
@@ -34,11 +35,10 @@ class Home extends BaseController
             'pegawaiByPendidikan' => $pegawaiByPendidikan,
             'pegawaiByGol' => $pegawaiByGol,
             'pegawaiByStatus' => $pegawaiByStatus,
+            'pegawaiByJK' => $pegawaiByJK,
             'pegawaipensiun' => $pegawaipensiun,
             'berkala' => $berkala,
         ];
-        // print_r($data);
-        // die();
         return view('menu/dashboard', $data);
     }
 

@@ -137,6 +137,18 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Nomor Askes</label>
+                        <input type="text" name="NoAskes" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nomor Dapenma</label>
+                        <input type="text" name="NoDapenma" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Rekening Bank</label>
+                        <input type="text" name="NoRekBank" class="form-control" />
+                    </div>
+                    <div class="form-group">
                         <label class="control-label">Agama</label>
                         <select class="form-control" name="KdAgama" id="">
                             <option value="">- Pilih Agama -</option>

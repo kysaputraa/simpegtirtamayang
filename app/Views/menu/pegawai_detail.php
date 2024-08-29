@@ -58,7 +58,7 @@ $db = \Config\Database::connect(); ?>
                         <div class="m-b-15 pull-center">
                             <h5><span class="label label-primary"> # Additional Setup </span></h5>
                         </div>
-                        <div class="m-r-7 m-b-10 pull-right">
+                        <!-- <div class="m-r-7 m-b-10 pull-right">
                             <span class="btn btn-default btn-sm" style="cursor: text;">Login</span>
                             <a data-toggle="modal" data-target="#Setlog61" class="btn btn-success btn-sm">
                                 <span class="ion-ios-gear fa-lg"></span>
@@ -69,7 +69,7 @@ $db = \Config\Database::connect(); ?>
                             <a data-toggle="modal" data-target="#Setkgb61" class="btn btn-warning btn-sm">
                                 <span class="ion-ios-gear fa-lg"></span>
                             </a>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- end profile-left -->
                     <!-- begin profile-right -->
@@ -96,73 +96,85 @@ $db = \Config\Database::connect(); ?>
                                             <td class="field">NIK</td>
                                             <td><?= $pegawai->NIK ?></td>
                                         </tr>
-                                        <tr class="divider">
+                                        <tr>
                                             <td colspan="2"></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Gelar Depan</td>
                                             <td><?= $pegawai->GelarDepan ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Gelar Belakang</td>
                                             <td><?= $pegawai->GelarBelakang ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Tempat Tanggal Lahir</td>
                                             <td><i class="fa fa-map-marker fa-lg m-r-5"></i> <?= $pegawai->TempatLahir ?>, <?= Multifungsi::tampilbulanindo($pegawai->TglLahir) ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Umur</td>
                                             <td><?php echo Multifungsi::umur($pegawai->TglLahir) ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Jenis Kelamin</td>
                                             <td><i class="fa fa-intersex fa-lg m-r-5"></i><?= $pegawai->KdKelamin == 'L' ? 'Laki - Laki' : 'Perempuan'; ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Agama</td>
                                             <td><?= $pegawai->Agama ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Golongan Darah</td>
                                             <td><?= $pegawai->GolDarah ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Status Pernikahan</td>
                                             <td>Nikah</td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">No. HP</td>
                                             <td><i class="fa fa-mobile fa-lg m-r-5"></i><?= $pegawai->HP ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Alamat</td>
                                             <td><?= $pegawai->Alamat ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">No. NPWP</td>
                                             <td><?= $pegawai->NPWP ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Status Kepegawaian</td>
                                             <td><?= $pegawai->StatusPegawai ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Golongan - Pangkat</td>
                                             <td><?= $pegawai->kdgol . " - " . $pegawai->pangkat ?></td>
                                         </tr>
 
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Jabatan</td>
                                             <td><?= $pegawai->NamaJabatan2 ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Pend. Akhir</td>
                                             <td><?= $pegawai->tingkatpendidikan ?></td>
                                         </tr>
-                                        <tr>
+                                        <tr class="highlight">
                                             <td class="field">Department</td>
                                             <td><?= $pegawai->Bagian ?></td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Nomor Askes</td>
+                                            <td><?= $pegawai->NoAskes ?></td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Nomor Dapenma</td>
+                                            <td><?= $pegawai->NoDapenma ?></td>
+                                        </tr>
+                                        <tr class="highlight">
+                                            <td class="field">Rekening Bank</td>
+                                            <td><?= $pegawai->NoRekBank ?></td>
                                         </tr>
                                         <!-- <tr>
                                             <td class="field">Jatuh Tempo Pensiun</td>
@@ -499,6 +511,18 @@ $db = \Config\Database::connect(); ?>
                     <div class="form-group">
                         <label class="control-label">NPWP</label>
                         <input type="text" name="NPWP" class="form-control" value="<?= $pegawai->NPWP ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nomor Askes</label>
+                        <input type="text" name="NoAskes" class="form-control" value="<?= $pegawai->NoAskes ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nomor Dapenma</label>
+                        <input type="text" name="NoDapenma" class="form-control" value="<?= $pegawai->NoDapenma ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Rekening Bank</label>
+                        <input type="text" name="NoRekBank" class="form-control" value="<?= $pegawai->NoRekBank ?>" />
                     </div>
                 </div>
                 <div class="modal-footer">

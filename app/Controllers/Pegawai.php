@@ -75,6 +75,9 @@ class Pegawai extends BaseController
             'Alamat' => $this->request->getPost('Alamat'),
             'HP' => $this->request->getPost('HP'),
             'NPWP' => $this->request->getPost('NPWP'),
+            'NoAskes' => $this->request->getPost('NoAskes'),
+            'NoDapenma' => $this->request->getPost('NoDapenma'),
+            'NoRekBank' => $this->request->getPost('NoRekBank'),
         ];
 
         $update = $this->PegawaiModel->set($data)->where('NIK', $NIK)->update();
@@ -100,7 +103,11 @@ class Pegawai extends BaseController
             'KdKelamin' => $this->request->getPost('KdKelamin'),
             'KdAgama' => $this->request->getPost('KdAgama'),
             'KdStatusPegawai' => $this->request->getPost('KdStatusPegawai'),
+            'NoAskes' => $this->request->getPost('NoAskes'),
+            'NoDapenma' => $this->request->getPost('NoDapenma'),
+            'NoRekBank' => $this->request->getPost('NoRekBank'),
             'KdAktif' => 'A01',
+
         ];
 
         $add = $this->PegawaiModel->insert($data);

@@ -230,6 +230,11 @@ class PegawaiModel extends Model
         return $builder->get();
     }
 
+    public function getDepartmentJumlahPegawai()
+    {
+        return $this->db->query("select a.Bagian, (select count(b.nik) from tpegawai b where b.KdBagian = a.KdBagian AND b.KdAktif = 'A01') as jumlahPegawai from mbagian a WHERE a.Aktif = '1'");
+    }
+
     public function getPegawaiByPendidikan()
     {
         $builder = $this->db->table('tpegawai a');  // Replace with your employee table name
@@ -238,6 +243,11 @@ class PegawaiModel extends Model
         $builder->where('a.KdAktif', 'A01');
         $builder->groupBy('b.kdtingkatdidik');
         return $builder->get();
+    }
+
+    public function getPendidikanJumlahPegawai()
+    {
+        return $this->db->query("select a.TingkatPendidikan, (select count(b.nik) from tpegawai b where b.KdPendidikan = a.kdtingkatdidik AND b.KdAktif = 'A01') as jumlahPegawai from mtingkatdidik a order by a.id asc");
     }
 
     public function getPegawaiByStatus()
@@ -251,6 +261,11 @@ class PegawaiModel extends Model
             ->get();
     }
 
+    public function getStatusJumlahPegawai()
+    {
+        return $this->db->query("select a.StatusPegawai, (select count(b.nik) from tpegawai b where b.KdStatusPegawai = a.KdStatusPegawai AND b.KdAktif = 'A01') as jumlahPegawai from mstatuspegawai a order by a.id asc");
+    }
+
     public function getPegawaiByGol()
     {
         $builder = $this->db->table('tpegawai a');
@@ -260,6 +275,11 @@ class PegawaiModel extends Model
             ->where('a.KdAktif', 'A01')
             ->groupBy('b.kdgol')
             ->get();
+    }
+
+    public function getGolonnganJumlahPegawai()
+    {
+        return $this->db->query("select a.kdgol, (select count(b.nik) from tpegawai b where b.kdgol = a.kdgol AND b.KdAktif = 'A01') as jumlahPegawai from mgol a order by a.id asc");
     }
 
     public function getPegawaiPensiun()
@@ -288,6 +308,15 @@ class PegawaiModel extends Model
                                     WHERE a.KdAktif = 'A01'
                                     HAVING berkala >= 2
                                     order  by terakhirberkala desc");
+    }
+
+    public function getPegawaiByJK()
+    {
+        $builder = $this->db->table('tpegawai a');  // Replace with your employee table name
+        $builder->select('a.KdKelamin, count(a.nik) as jumlah');
+        $builder->where('a.KdAktif', 'A01');
+        $builder->groupBy('a.KdKelamin');
+        return $builder->get();
     }
 
     public function JumlahAktif()

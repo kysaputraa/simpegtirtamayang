@@ -59,7 +59,7 @@
     </div>
     <!-- end col-3 -->
     <!-- begin col-3 -->
-    <div class="col-md-3 col-sm-6">
+    <!-- <div class="col-md-3 col-sm-6">
         <div class="widget widget-stats bg-white text-inverse">
             <div class="stats-icon stats-icon-lg stats-icon-square bg-gradient-orange"><i class="ion-ios-timer"></i></div>
             <div class="stats-title">DIKLAT</div>
@@ -69,7 +69,7 @@
             </div>
             <div class="stats-desc">Total Data Diklat</div>
         </div>
-    </div>
+    </div> -->
     <!-- end col-3 -->
     <!-- begin col-3 -->
     <!-- <div class="col-md-3 col-sm-6">
@@ -117,11 +117,30 @@
                 </div>
                 <h4 class="panel-title">Pegawai Per Golongan</h4>
             </div>
-            <div class="panel-body chartcontainer">
+            <div class="panel-body chartcontainer ">
                 <canvas id="chartgol"></canvas>
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Persentase JumlahPegawai Per Golongan</h4>
+            </div>
+            <div class="panel-body chartcontainer d-flex justify-content-center">
+                <canvas id="chartgolPie"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-6">
         <div class="panel panel-inverse">
             <div class="panel-heading">
@@ -138,6 +157,22 @@
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Persentase Jumlah Pegawai Per Status</h4>
+            </div>
+            <div class="panel-body chartcontainer d-flex justify-content-center">
+                <canvas id="chartstatusPie"></canvas>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
@@ -150,7 +185,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Pegawai Pensiun Tahun Ini</h4>
+                <h4 class="panel-title">Pegawai Pensiun Tahun <?= date('Y') ?></h4>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -192,7 +227,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Pegawai Pensiun Tahun Depan</h4>
+                <h4 class="panel-title">Pegawai Pensiun Tahun <?= date('Y') + 1 ?> </h4>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -236,7 +271,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Pegawai Berkala Tahun Ini</h4>
+                <h4 class="panel-title">Pegawai Berkala Tahun <?= date('Y') ?></h4>
             </div>
             <div class="panel-body">
                 <div class="table-responsive">
@@ -272,7 +307,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
         <div class="panel panel-inverse">
             <div class="panel-heading">
                 <div class="panel-heading-btn">
@@ -285,6 +320,57 @@
             </div>
             <div class="panel-body chartcontainer">
                 <canvas id="chartpendidikan"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Persentase Jumlah Pegawai Berdasarkan Tingkat Pendidikan</h4>
+            </div>
+            <div class="panel-body chartcontainer d-flex justify-content-center">
+                <canvas id="chartpendidikanPie"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Pegawai Berdasarkan Jenis Kelamin</h4>
+            </div>
+            <div class="panel-body chartcontainer">
+                <canvas id="chartJK"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-inverse">
+            <div class="panel-heading">
+                <div class="panel-heading-btn">
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-repeat"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                    <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                </div>
+                <h4 class="panel-title">Persentase Jumlah Pegawai Berdasarkan Jenis Kelamin</h4>
+            </div>
+            <div class="panel-body chartcontainer d-flex justify-content-center">
+                <canvas id="chartJKPie"></canvas>
             </div>
         </div>
     </div>
@@ -304,6 +390,7 @@
     var pegawaiByPendidikan = <?= json_encode($pegawaiByPendidikan) ?>;
     var pegawaiByGol = <?= json_encode($pegawaiByGol) ?>;
     var pegawaiByStatus = <?= json_encode($pegawaiByStatus) ?>;
+    var pegawaiByJK = <?= json_encode($pegawaiByJK) ?>;
 
     const colors = [
         'rgba(173, 216, 230, 1)', // Light Blue (Serene Sky)
@@ -343,11 +430,11 @@
 
     const DataPegawaiByPendidikan = pegawaiByPendidikan.map((obj, index) => {
         const {
-            tingkatpendidikan,
+            TingkatPendidikan,
             jumlahPegawai
         } = obj;
         return {
-            label: [tingkatpendidikan],
+            label: [TingkatPendidikan],
             data: [jumlahPegawai],
             borderWidth: 1,
             backgroundColor: colors[index],
@@ -382,6 +469,24 @@
         };
     });
 
+    const DataPegawaiByJK = pegawaiByJK.map((obj, index) => {
+        // Destructure with new key name
+        const {
+            KdKelamin,
+            jumlah
+        } = obj;
+        // Spread with renamed key
+        return {
+            label: [KdKelamin],
+            data: [jumlah],
+            borderWidth: 1,
+            backgroundColor: colors[index],
+        };
+    });
+
+    console.log(pegawaiByJK)
+    console.log(DataPegawaiByJK)
+
     var colorset = [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',
@@ -392,6 +497,11 @@
     initChart('bar', chartpendidikan, DataPegawaiByPendidikan, 'Statistik Jumlah Pegawai Berdasarkan Pendidikan');
     initChart('bar', chartgol, DataPegawaiByGol, 'Statistik Jumlah Pegawai Berdasarkan Golongan');
     initChart('bar', chartstatus, DataPegawaiByStatus, 'Statistik Jumlah Pegawai Berdasarkan Status');
+    initChart('bar', chartJK, DataPegawaiByJK, 'Statistik Jumlah Pegawai Berdasarkan Jenis Kelamin');
+    initChartPie(chartJKPie, pegawaiByJK, 'Persentase Jumlah Pegawai Berdasarkan Jenis Kelamin', colors);
+    initChartPie(chartpendidikanPie, pegawaiByPendidikan, 'Persentase Jumlah Pegawai Berdasarkan Pendidikan ', colors);
+    initChartPie(chartstatusPie, pegawaiByStatus, 'Persentase Jumlah Pegawai Berdasarkan Status ', colors);
+    initChartPie(chartgolPie, pegawaiByGol, 'Persentase Jumlah Pegawai Berdasarkan Golongan ', colors);
 </script>
 
 <?= $this->endSection() ?>
