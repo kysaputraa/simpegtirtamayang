@@ -37,7 +37,13 @@ class Berkala extends BaseController
     public function modaledit()
     {
         $id = $this->request->getPost('id');
-        $data = ['Berkala' => $this->BerkalaModel->where('id', $id)->first()];
+        $KenaikanPangkat = $this->KenaikanPangkatModel->findAll();
+        $Golongan = $this->GolonganModel->findAll();
+        $data = [
+            'Berkala' => $this->BerkalaModel->where('id', $id)->first(),
+            'KenaikanPangkat' => $KenaikanPangkat,
+            'Golongan' => $Golongan,
+        ];
         return view('modal/BerkalaModalEdit', $data);
     }
 
@@ -66,7 +72,6 @@ class Berkala extends BaseController
     {
         $id = $this->request->getPost('id');
         $data = [
-            'NIK' =>  $this->request->getPost('NIK'),
             'NoIDKepangkatan' =>  $this->request->getPost('NoIDKepangkatan'),
             'KdKenaikanPangkat' =>  $this->request->getPost('KdKenaikanPangkat'),
             'KdGolBaru' =>  $this->request->getPost('KdGolBaru'),

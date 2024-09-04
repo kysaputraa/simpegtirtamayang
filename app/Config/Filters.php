@@ -3,6 +3,7 @@
 namespace Config;
 
 use App\Filters\AuthFilter;
+use App\Filters\CekFromDB;
 use App\Filters\CekLogin;
 use App\Filters\CekOperator;
 use App\Filters\CekSuperAdmin;
@@ -45,6 +46,7 @@ class Filters extends BaseFilters
         'cekOperator'   => CekOperator::class,
         'cekUser'       => CekUser::class,
         'auth'          => AuthFilter::class,
+        'cekFromDB'     => CekFromDB::class,
     ];
 
     /**
@@ -81,6 +83,7 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             'cekLogin' => ['except' => ['aksespintu', 'ceklogin', 'auth', 'Api/*']],
+            'cekFromDB' => ['except' => ['aksespintu', 'ceklogin', 'auth', 'Api/*', '/', 'logout']],
 
             // 'honeypot',
             // 'csrf',
@@ -108,12 +111,12 @@ class Filters extends BaseFilters
     public array $methods = [];
 
     public array $filters = [
-        'cekSuperAdmin' => [
-            'before' => ['agama/', 'goldarah', 'TingkatDidik', 'StatusKeluarga', 'StatusPegawai', 'Aktif'],
-        ],
-        'cekUser' => [
-            'before' => ['pegawai/detail'],
-        ],
+        // 'cekSuperAdmin' => [
+        //     'before' => ['agama/', 'goldarah', 'TingkatDidik', 'StatusKeluarga', 'StatusPegawai', 'pegawai', 'Aktif'],
+        // ],
+        // 'cekUser' => [
+        //     'before' => ['pegawai/detail'],
+        // ],
         'auth' => [
             'before' => ['Api/*'],
         ],

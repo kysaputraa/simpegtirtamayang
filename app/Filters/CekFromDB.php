@@ -2,19 +2,24 @@
 
 namespace App\Filters;
 
+use App\Models\GlobalModel;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class CekSuperAdmin implements FilterInterface
+class CekFromDB implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
         // Do something here
-        $requiredLevel = 1;
-        $userLevel = session()->get('level');
+        $request = service('uri');
+        $globalModel = new GlobalModel();
 
-        if ($userLevel > $requiredLevel) {
+        $levelManagement = $globalModel->getLevelManagement(session()->get('level'))->getResult();
+        $variables = array_column($levelManagement, 'menu');
+        $firstSegment = $request->getSegment(1);
+
+        if (!in_array(strtolower($firstSegment), $variables) and session()->get('level') != 1) {
             session()->setFlashdata('gagal', 'You Are UnAuthorized to look this page !');
             return redirect()->to('/');
         }

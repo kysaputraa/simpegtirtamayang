@@ -9,9 +9,9 @@
 </div>
 <div class="form-group">
     <label class="control-label">Buat Gaji</label>
-    <input type="text" class="form-control" name="BuatGaji" value="<?= $StatusPegawai->BuatGaji ?>" />
+    <input type="number" class="form-control" name="BuatGaji" value="<?= $StatusPegawai->BuatGaji ?>" />
 </div>
 <div class="form-group">
     <label class="control-label">Persentase</label>
-    <input type="text" class="form-control" name="Persentase" value="<?= $StatusPegawai->Persentase ?>" />
+    <input type="number" class="form-control" name="Persentase" value="<?= $StatusPegawai->Persentase ?>" />
 </div>

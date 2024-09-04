@@ -33,7 +33,7 @@ $routes->group('pegawai', static function ($routes) {
     $routes->post('autocomplete', 'Pegawai::pencarian');
 });
 
-$routes->get('/goldarah', 'GolDarah::index');
+$routes->get('/Goldarah', 'GolDarah::index');
 $routes->group('goldarah', static function ($routes) {
     $routes->post('add/', 'GolDarah::add');
     $routes->get('delete/(:segment)', 'GolDarah::delete/$1');
@@ -41,7 +41,7 @@ $routes->group('goldarah', static function ($routes) {
     $routes->post('edit', 'GolDarah::edit');
 });
 
-$routes->group('agama', static function ($routes) {
+$routes->group('Agama', static function ($routes) {
     $routes->get('/', 'Agama::index');
     $routes->post('add/', 'Agama::add');
     $routes->get('delete/(:segment)', 'Agama::delete/$1');
@@ -142,6 +142,24 @@ $routes->group('Pelatihan', static function ($routes) {
     $routes->get('delete/(:segment)', 'Pelatihan::delete/$1');
     $routes->post('modaledit', 'Pelatihan::modaledit');
     $routes->post('edit', 'Pelatihan::edit');
+});
+
+$routes->group('Departemen', static function ($routes) {
+    $routes->get('/', 'Departemen::index');
+    $routes->post('add', 'Departemen::add');
+    $routes->post('modal/', 'Departemen::modal');
+    $routes->get('delete/(:segment)', 'Departemen::delete/$1');
+    $routes->post('modaledit', 'Departemen::modaledit');
+    $routes->post('edit', 'Departemen::edit');
+});
+
+$routes->group('Level', static function ($routes) {
+    $routes->get('/', 'Level::index');
+    $routes->post('add', 'Level::add');
+    $routes->post('modal/', 'Level::modal');
+    $routes->get('delete/(:segment)', 'Level::delete/$1');
+    $routes->post('modaledit', 'Level::modaledit');
+    $routes->post('edit', 'Level::edit');
 });
 
 $routes->get('/json', 'Home::json');

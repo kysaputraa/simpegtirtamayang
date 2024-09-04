@@ -88,11 +88,11 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Buat Gaji</label>
-                        <input type="text" class="form-control" name="BuatGaji" value="" />
+                        <input type="number" class="form-control" name="BuatGaji" value="" />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Persentase</label>
-                        <input type="text" class="form-control" name="Persentase" value="" />
+                        <input type="number" class="form-control" name="Persentase" value="" />
                     </div>
                 </div>
                 <div class="modal-footer">

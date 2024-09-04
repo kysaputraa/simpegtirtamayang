@@ -31,7 +31,7 @@
     <select class="form-control" name="KdKelamin" id="" required>
         <option value="">-Pilih Jenis Kelamin-</option>
         <option <?= $keluarga->KdKelamin == 'L' ? 'selected' : ''  ?> value="L">Laki - Laki</option>
-        <option <?= $keluarga->KdKelamin == 'P' ? 'selected' : ''  ?> value="P">Peremepuan</option>
+        <option <?= $keluarga->KdKelamin == 'P' ? 'selected' : ''  ?> value="P">Perempuan</option>
     </select>
 </div>
 <div class="form-group">

@@ -2,37 +2,38 @@
 
 namespace App\Controllers;
 
-use App\Models\StatusKeluargaModel;
+use App\Models\DepartemenModel;
 
-class StatusKeluarga extends BaseController
+class Departemen extends BaseController
 {
-    var $StatusKeluargaModel;
+    var $DepartemenModel;
     public function __construct()
     {
         $this->session = \Config\Services::session();
-        $this->StatusKeluargaModel = new StatusKeluargaModel();
+        $this->DepartemenModel = new DepartemenModel();
     }
 
     public function index()
     {
-        $data = ['StatusKeluarga' => $this->StatusKeluargaModel->findAll(),];
-        return view('menu/StatusKeluargaList', $data);
+        $data = ['Departemen' => $this->DepartemenModel->where('Aktif', 1)->orderBy('id', 'desc')->findAll(),];
+        return view('menu/DepartemenList', $data);
     }
 
     public function modaledit()
     {
         $id = $this->request->getPost('id');
-        $data = ['StatusKeluarga' => $this->StatusKeluargaModel->where('id', $id)->first()];
-        return view('modal/StatusKeluargaModalEdit', $data);
+        $data = ['Departemen' => $this->DepartemenModel->where('id', $id)->first()];
+        return view('modal/DepartemenModalEdit', $data);
     }
 
     public function add()
     {
         $data = [
-            'kdstatuskeluarga' =>  $this->request->getPost('KdStatusKeluarga'),
-            'statuskeluarga' => $this->request->getPost('StatusKeluarga'),
+            'KdBagian' =>  $this->request->getPost('KdBagian'),
+            'Bagian' =>  $this->request->getPost('Bagian'),
+            'Aktif' =>  1,
         ];
-        $add = $this->StatusKeluargaModel->insert($data);
+        $add = $this->DepartemenModel->insert($data);
         if ($add) {
             $this->session->setFlashdata('sukses', 'Berhasil !');
         } else {
@@ -45,10 +46,10 @@ class StatusKeluarga extends BaseController
     {
         $id = $this->request->getPost('id');
         $data = [
-            'kdstatuskeluarga' => $this->request->getPost('KdStatusKeluarga'),
-            'statuskeluarga' => $this->request->getPost('StatusKeluarga'),
+            'KdBagian' =>  $this->request->getPost('KdBagian'),
+            'Bagian' =>  $this->request->getPost('Bagian'),
         ];
-        $edit = $this->StatusKeluargaModel->set($data)->where('id', $id)->update();
+        $edit = $this->DepartemenModel->set($data)->where('id', $id)->update();
         if ($edit) {
             $this->session->setFlashdata('sukses', 'Berhasil !');
         } else {
@@ -59,7 +60,7 @@ class StatusKeluarga extends BaseController
 
     public function delete($id)
     {
-        $delete = $this->StatusKeluargaModel->where('id', $id)->delete();
+        $delete = $this->DepartemenModel->where('id', $id)->set('Aktif', 0)->update();
         if ($delete) {
             $this->session->setFlashdata('sukses', 'Berhasil !');
         } else {

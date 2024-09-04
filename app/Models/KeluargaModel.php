@@ -41,7 +41,7 @@ class KeluargaModel extends Model
             ->where('status', 'aktif')
             ->join('mstatuskeluarga b', 'b.kdstatuskeluarga = a.kdstatuskeluarga')
             ->join('tpegawai c', 'c.NIK = a.NIK')
-            ->join('mtingkatdidik d', 'd.kdtingkatdidik = a.KdTingkatDidik')
+            ->join('mtingkatdidik d', 'd.kdtingkatdidik = a.KdTingkatDidik', 'left')
             ->orderBy('id_keluarga', 'desc')
             ->get();
     }

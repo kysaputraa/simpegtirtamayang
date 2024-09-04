@@ -11,7 +11,7 @@
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
-<h1 class="page-header">DATA Agama<small class="text-capitalize"> Master Agama</small></h1>
+<h1 class="page-header">DATA Departemen<small class="text-capitalize"> Master Departemen</small></h1>
 <!-- end page-header -->
 
 <!-- begin row -->
@@ -27,7 +27,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
                 </div>
-                <h4 class="panel-title">Data Agama - Perumdam Tirta Mayang Kota Jambi</h4>
+                <h4 class="panel-title">Data Departemen - Perumdam Tirta Mayang Kota Jambi</h4>
                 <a href="#" data-target='#modaltambah' data-toggle="modal"><span class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah</span></a>
             </div>
             <div class="panel-body">
@@ -36,8 +36,8 @@
                         <thead>
                             <tr>
                                 <th width='50'>NO</th>
-                                <th>Kode</th>
-                                <th>Agama</th>
+                                <th>Kode Bagian</th>
+                                <th>Bagian</th>
                                 <th width='70px'>Aksi</th>
                             </tr>
                         </thead>
@@ -47,14 +47,14 @@
                             use App\libraries\Multifungsi;
 
                             $no = 1;
-                            foreach ($agama as $row) {
-                                echo "<tr class='clickedrow' data-id='" . $row->KdAgama . "'>";
+                            foreach ($Departemen as $row) {
+                                echo "<tr>";
                                 echo "<td class='text-center'>" . $no . "</td>";
-                                echo "<td>" . $row->KdAgama . "</td>";
-                                echo "<td>" . $row->Agama . "</td>";
+                                echo "<td>" . $row->KdBagian . "</td>";
+                                echo "<td>" . $row->Bagian . "</td>";
                                 echo "<td>";
                                 echo "<span><a data-id='" . $row->id . "' data-toggle='modal' data-target='#modaledit' class='btn btn-info btn-icon btn-sm' ><i class='fa fa-pencil fa-lg'></i></a></span> ";
-                                echo "<span><a onClick='return confirm(`Apakah anda yakin ingin menghapus data ini ?`)' href='Agama/delete/" . $row->id . "' type='button' class='btn btn-danger btn-icon btn-sm' title='delete'><i class='fa fa-trash-o fa-lg'></i></a></span> ";
+                                echo "<span><a onClick='return confirm(`Apakah anda yakin ingin menghapus data ini ?`)' href='Departemen/delete/" . $row->id . "' type='button' class='btn btn-danger btn-icon btn-sm' title='delete'><i class='fa fa-trash-o fa-lg'></i></a></span> ";
                                 echo "</tr>";
                                 $no++;
                             }
@@ -75,15 +75,15 @@
             <div class="modal-header">
                 <h5 class="modal-title"><span class="label label-inverse"> # Tambah</span> Silahkan isi data di bawah untuk menambah data .</h5>
             </div>
-            <form role="form" action="Agama/add" method="post" enctype="multipart/form-data">
+            <form role="form" action="Departemen/add" method="post" enctype="multipart/form-data">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label">Kode</label>
-                        <input type="text" class="form-control" name="KdAgama" value="" />
+                        <input type="text" class="form-control" name="KdBagian" value="" />
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Agama</label>
-                        <input type="text" class="form-control" name="Agama" value="" />
+                        <label class="control-label">Nama Departemen</label>
+                        <input type="text" class="form-control" name="Bagian" value="" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -101,7 +101,7 @@
             <div class="modal-header">
                 <h5 class="modal-title"><span class="label label-inverse"> # Edit</span> Silahkan isi data di bawah untuk update data .</h5>
             </div>
-            <form role="form" action="Agama/edit" method="post" enctype="multipart/form-data">
+            <form role="form" action="Departemen/edit" method="post" enctype="multipart/form-data">
                 <div class="modal-body hasiledit">
 
                 </div>
@@ -113,6 +113,7 @@
         </div>
     </div>
 </div>
+
 <style>
     table {
         overflow: auto;
@@ -138,7 +139,7 @@
     $('#modaledit').on('show.bs.modal', function(e) {
         var id = $(e.relatedTarget).data('id');
         $.ajax({
-            url: '<?= base_url('Agama/modaledit') ?>',
+            url: '<?= base_url('Departemen/modaledit') ?>',
             method: 'POST',
             data: {
                 'id': id
@@ -148,17 +149,5 @@
             }
         })
     });
-
-    $.ajax({
-        url: 'json',
-        type: 'GET',
-        dataType: 'json',
-        success: function(result) {
-            // var json = JSON.parse(result);
-            // console.log(json.nik)
-            console.log(result);
-            console.log(parseInt(result.NIK).toLocaleString('ID'));
-        }
-    })
 </script>
 <?= $this->endSection() ?>

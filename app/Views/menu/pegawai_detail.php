@@ -773,7 +773,7 @@ $db = \Config\Database::connect(); ?>
     $('#modaleditpendidikan').on('show.bs.modal', function(e) {
         var id = $(e.relatedTarget).data('id');
         $.ajax({
-            url: '<?= base_url() ?>' + 'Pendidikan/modaledit',
+            url: '<?= base_url('Pendidikan/modaledit') ?>',
             type: 'POST',
             data: {
                 id: id

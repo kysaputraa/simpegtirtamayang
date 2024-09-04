@@ -15,6 +15,7 @@ class CekUser implements FilterInterface
         $userLevel = session()->get('level');
 
         if ($userLevel > $requiredLevel) {
+            session()->setFlashdata('gagal', 'You Are UnAuthorized to look this page !');
             return redirect()->to('/');
         }
     }

@@ -88,7 +88,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="control-label">Pegawai</label>
-                        <input type="text" class="form-control" id="search-pegawai" value="" required />
+                        <input type="text" class="form-control" id="search-pegawai" value="" required autocomplete='off' />
                         <div class="position-absolute w-100" style="z-index: 10;" id="suggesstion-box"></div>
                         <div id="showhere" class="d-block">
 
@@ -124,11 +124,11 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Tanggal SK</label>
-                        <input type="text" class="form-control" name="TglSKBaru" value="" required />
+                        <input type="date" class="form-control" name="TglSKBaru" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">TMT</label>
-                        <input type="text" class="form-control" name="TMTBaru" value="" required />
+                        <input type="date" class="form-control" name="TMTBaru" value="" required />
                     </div>
                     <div class="form-group">
                         <label class="control-label">Keterangan</label>

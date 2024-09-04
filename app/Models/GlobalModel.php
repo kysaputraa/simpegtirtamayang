@@ -21,6 +21,12 @@ class GlobalModel extends Model
             ->get();
     }
 
+    public function getLevelManagement($level)
+    {
+        $builder = $this->db->table('levelmanagement a');
+        return $builder->where('level', $level)->get();
+    }
+
     public function getAgama()
     {
         $builder = $this->db->table('magama a');
